@@ -212,7 +212,10 @@ section {
 
 .app-list {
   background: white;
-  margin: 8px;
+  margin-top: 0 !important;
+  margin: 0;
+  padding-top: 0 !important;
+  padding:0;
   p, h4 {
     padding: 4px 8px !important;
   }
@@ -224,6 +227,9 @@ section {
 
 .app-list-item{
   padding: 0 8px;
+  &:hover{
+    background: rgba(0,0,0, 0.25);
+  }
 }
 
 .card{

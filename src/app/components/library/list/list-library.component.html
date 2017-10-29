@@ -6,14 +6,13 @@
     <mat-list class="app-list">
 
       <!--list -->
-      <mat-list-item *ngFor="let library of libraries.data" class="app-list-item">
-        <mat-icon mat-list-icon>class</mat-icon>
+      <mat-list-item *ngFor="let library of libraries.data" class="app-list-item" (click)="selectLibrary(library)">
+        <mat-icon mat-list-icon>local_library</mat-icon>
         <h4 mat-line>{{library.name}}</h4>
         <p mat-line> {{library.description}} </p>
-        <button mat-icon-button (click)="selectLibrary(library)">
-          <mat-icon>search</mat-icon>
-        </button>
-        <mat-divider></mat-divider>
+        <!--<button mat-icon-button>-->
+          <!--<mat-icon>visibility</mat-icon>-->
+        <!--</button>-->
       </mat-list-item>
 
       <!--list is empty-->

@@ -21,7 +21,8 @@
 
     <!-- description -->
     <mat-form-field>
-      <input matInput type="text" placeholder="Description" formControlName="description">
+      <textarea matInput type="text" placeholder="Description" formControlName="description" rows="4">
+      </textarea>
       <mat-error [hidden]="!(bookForm.get('description').hasError('required'))">
         * required.
       </mat-error>
