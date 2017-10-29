@@ -1,36 +1,37 @@
+<!--loading bar-->
+<mat-progress-bar color="primary" mode="indeterminate" *ngIf="loaders.books"></mat-progress-bar>
+
 <mat-card class="card">
   <mat-list class="app-list">
 
-    <h3 mat-subheader>Books</h3>
-
-    <!--loading bar-->
-    <mat-progress-bar color="primary" mode="indeterminate" *ngIf="loaders.books"></mat-progress-bar>
-
     <!--list -->
-    <mat-list-item *ngFor="let book of books.data" class="app-list-item">
+    <mat-list-item *ngFor="let book of books.data; let index = index;" class="app-list-item">
       <mat-icon mat-list-icon>class</mat-icon>
       <h4 mat-line>{{book.name}}</h4>
       <p mat-line> {{book.description}} </p>
       <button mat-icon-button
               *ngIf="book.is_available"
-              (click)="issueBook(book)"
+              (click)="issueBook(book, index)"
+              [disabled]="loaders.books"
               matTooltip="issue book"
               matTooltipPosition="left">
         <mat-icon>file_download</mat-icon>
       </button>
       <button mat-icon-button
               *ngIf="!book.is_available"
-              (click)="return(book)"
+              (click)="returnBook(book, index)"
+              [disabled]="loaders.books"
               matTooltip="return book"
               matTooltipPosition="left">
         <mat-icon>file_upload</mat-icon>
       </button>
-      <mat-divider></mat-divider>
     </mat-list-item>
 
     <!--list is empty-->
     <mat-list-item *ngIf="!books.data.length && !loaders.books">
-      <p class="app-center">There are no books / all books are issued.</p>
+      <p class="app-center" *ngIf="!userMode">There are no books / all books are issued.</p>
+      <p class="app-center" *ngIf="userMode">Currently no books are issued on your name.</p>
     </mat-list-item>
+
   </mat-list>
 </mat-card>

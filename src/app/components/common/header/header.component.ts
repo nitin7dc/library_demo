@@ -1,8 +1,7 @@
-import {Component, OnDestroy, ViewChild, OnInit, Output, EventEmitter} from '@angular/core';
+import {Component, ViewChild, OnInit, Output, EventEmitter} from '@angular/core';
 import {AuthService, UserService} from '../../../services';
 import {Router} from '@angular/router';
-import {MatSidenavModule, MatMenuTrigger} from '@angular/material';
-import {Observable, Subscription} from 'rxjs/Rx';
+import {MatMenuTrigger} from '@angular/material';
 import {User} from "../../../models";
 
 @Component({
@@ -13,21 +12,26 @@ import {User} from "../../../models";
 export class HeaderComponent implements OnInit {
 
   showMenu = false;
-  userSubscription: Subscription;
   loggedInUser: User;
   @ViewChild('menu') menu: MatMenuTrigger;
   @Output() toggleMenu = new EventEmitter();
 
   constructor(private authService: AuthService,
+              private userService: UserService,
               private router: Router) {
-    this.listenToAuthState();
+    this.listenForUpdates();
   }
 
-  listenToAuthState() {
+  listenForUpdates() {
+
     this.authService.authState.subscribe(state => {
-      console.log('auth sstat : ' + state);
       this.showMenu = state;
     });
+
+    this.userService.getCurrentUser().subscribe(data => {
+      this.loggedInUser = data;
+    });
+
   }
 
   /**

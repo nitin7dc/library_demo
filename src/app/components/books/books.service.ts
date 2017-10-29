@@ -54,19 +54,19 @@ export class BooksService {
    * @param library_id
    */
   load(loader: any, targetField, library_id): void {
-    loader.library = true;
+    loader.books = true;
     const params: URLSearchParams = new URLSearchParams();
     params.set('library_id', library_id);
 
     this.apiService.get('/books', params)
       .subscribe(data => {
 
-        loader.library = false;
+        loader.books = false;
         targetField.data = data.docs || [];
 
       }, error => {
 
-        loader.library = false;
+        loader.books = false;
         if (error && error.message) {
           this.alertService.error(error.message);
         } else {
@@ -80,21 +80,51 @@ export class BooksService {
   /**
    * Issue a book.
    * @param loader
-   * @param payload
-   * @param callback
-   * @param scope
+   * @param book
+   * @param books
+   * @param index
    */
-  issue(loader: any, book: Book, user: User): void {
-    loader.book = true;
+  issue(loader: any, book: Book, books: any, index): void {
+    loader.books = true;
 
     this.apiService.post('/books/issue', {book_id: book._id})
       .subscribe(data => {
 
-        loader.book = false;
+        loader.books = false;
+        books.data = books.data || [];
+        books.data.splice(index, 1);
+        loader.books = false;
         this.alertService.success("Book Issued.");
-        user.books = user.books || [];
-        user.books.push(book);
-        // todo: check if user is requred to be bupdated.
+
+      }, error => {
+
+        loader.loading = false;
+        loader.message = "";
+        if (error && error.message) {
+          this.alertService.error(error.message);
+        } else {
+          this.alertService.error();
+        }
+
+      });
+  }
+
+  /**
+   * Return previously issued book.
+   * @param loader
+   * @param book
+   * @param books
+   * @param index
+   */
+  returnBook(loader: any, book: Book, books: any, index): void {
+    loader.books = true;
+
+    this.apiService.post('/books/return', {book_id: book._id})
+      .subscribe(data => {
+        books.data = books.data || [];
+        books.data.splice(index, 1);
+        loader.books = false;
+        this.alertService.success("Book returned.");
 
       }, error => {
 
@@ -116,17 +146,17 @@ export class BooksService {
    * @param targetField
    */
   myBooks(loader: any, targetField): void {
-    loader.library = true;
+    loader.books = true;
 
     this.apiService.get('/users/books')
       .subscribe(data => {
 
-        loader.library = false;
-        targetField.data = data.docs || [];
+        loader.books = false;
+        targetField.data = data || [];
 
       }, error => {
 
-        loader.library = false;
+        loader.books = false;
         if (error && error.message) {
           this.alertService.error(error.message);
         } else {

@@ -14,20 +14,27 @@
 </mat-toolbar>
 
 
-<section>
+<section *ngIf="show.list">
 
+  <h2>Libraries</h2>
   <app-list-library
-    *ngIf="show.list"
     [libraryId]="libraryId"
     class="card">
   </app-list-library>
 
-  <!--Add new library-->
+  <br/>
+  <h2>My Books</h2>
+  <app-list-books userMode="true"></app-list-books>
+
+</section>
+
+
+<!--Add new library-->
+<section *ngIf="show.create">
+
   <app-create-library
-    *ngIf="show.create"
     class="card"
     (passEvents)="listenToChild($event)">
   </app-create-library>
-
 
 </section>

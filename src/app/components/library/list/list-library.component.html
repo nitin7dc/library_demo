@@ -1,11 +1,9 @@
+<!--loading bar-->
+<mat-progress-bar color="primary" mode="indeterminate" [hidden]="!loaders.library"></mat-progress-bar>
+
 <mat-card>
   <mat-card-content>
     <mat-list class="app-list">
-
-      <h3 mat-subheader>Libraries</h3>
-
-      <!--loading bar-->
-      <mat-progress-bar color="primary" mode="indeterminate" [hidden]="!loaders.library"></mat-progress-bar>
 
       <!--list -->
       <mat-list-item *ngFor="let library of libraries.data" class="app-list-item">

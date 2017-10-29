@@ -19,15 +19,14 @@
 </mat-toolbar>
 
 <section>
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <mat-icon>info</mat-icon>
+    <p class="library-description"> {{library?.description}} </p>
+  </div>
 
-  <mat-card class="card">
-    <mat-card-content>
-      <h2>Name : {{library?.name}}</h2>
-      <p>{{library?.description}}</p>
-    </mat-card-content>
-  </mat-card>
 
   <!--list of books-->
+  <h2>Books</h2>
   <app-list-books
     *ngIf="show.list"
     [library_id]="library._id">

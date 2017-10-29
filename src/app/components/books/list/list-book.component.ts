@@ -13,12 +13,12 @@ import {User} from "../../../models/user";
 export class ListBooksComponent implements OnInit {
 
   @Input() library_id: string;
+  @Input() userMode = false;
   @Input() booksReady = [];
   user: User;
 
   loaders = {
-    books: false,
-    book: false
+    books: false
   };
 
   books = {
@@ -33,8 +33,8 @@ export class ListBooksComponent implements OnInit {
 
   ngOnInit() {
 
-    if (this.booksReady.length) {
-      this.books.data = this.booksReady;
+    if (this.userMode) {
+      this.booksService.myBooks(this.loaders, this.books);
     } else {
       this.booksService.load(this.loaders, this.books, this.library_id);
     }
@@ -57,8 +57,8 @@ export class ListBooksComponent implements OnInit {
    * Issue book to logged in user.
    * @param book
    */
-  issueBook(book) {
-    this.booksService.issue(this.loaders, book, this.user);
+  issueBook(book, index) {
+    this.booksService.issue(this.loaders, book, this.books, index);
   }
 
 
@@ -66,8 +66,8 @@ export class ListBooksComponent implements OnInit {
    * return book.
    * @param book
    */
-  returnBook(book) {
-    console.log(book);
+  returnBook(book, index) {
+    this.booksService.returnBook(this.loaders, book, this.books, index);
   }
 
 }
