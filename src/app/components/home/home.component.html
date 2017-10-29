@@ -23,8 +23,8 @@
   </app-list-library>
 
   <br/>
-  <h2>My Books</h2>
-  <app-list-books userMode="true"></app-list-books>
+  <h2 *ngIf="!admin">My Books</h2>
+  <app-list-books userMode="true" *ngIf="!admin"></app-list-books>
 
 </section>
 

@@ -14,3 +14,9 @@ h1 {
   font-size: large;
   font-weight: 500;
 }
+
+.sign-up{
+  /deep/ .mat-card{
+    padding: 24px !important;
+  }
+}

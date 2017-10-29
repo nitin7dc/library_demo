@@ -16,6 +16,7 @@ export class ListBooksComponent implements OnInit {
   @Input() userMode = false;
   @Input() booksReady = [];
   user: User;
+  isAdmin = false;
 
   loaders = {
     books: false
@@ -39,6 +40,7 @@ export class ListBooksComponent implements OnInit {
       this.booksService.load(this.loaders, this.books, this.library_id);
     }
 
+    this.isAdmin = this.userService.isAdmin();
     this.getUser();
   }
 

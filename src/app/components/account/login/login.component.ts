@@ -23,7 +23,7 @@ export class LoginComponent {
               private alertService: AlertService) {
 
     if (this.authService.hasLoggedIn()) {
-      this.router.navigateByUrl('dashboard');
+      this.router.navigateByUrl('home');
     }
 
     this.user = new FormGroup({
@@ -56,41 +56,6 @@ export class LoginComponent {
         }
       });
   }
-
-
-  /**
-   *  Send password reset email.
-   */
-  resetPassword() {
-    this.loading = true;
-    this.message = "sending email...";
-    this.showResetPassword = false;
-    // this.authService.resetPassword(this.user.value.email)
-    //   .then(data => {
-    //     this.loading = false;
-    //     this.message = "";
-    //     this.alertService.success("Check your mailbox for password reset email.");
-    //   })
-    //   .catch(error => {
-    //     this.loading = false;
-    //     this.message = "";
-    //     if (error && error.message) {
-    //       this.alertService.error(error.message);
-    //     } else {
-    //       this.alertService.error();
-    //     }
-    //   });
-  }
-
-
-  /**
-   * Login/Reset Password view toggle.
-   */
-  toggleResetPassword() {
-    this.user.reset();
-    this.showResetPassword = !this.showResetPassword;
-  }
-
 
   /**
    * Send to sign up page.

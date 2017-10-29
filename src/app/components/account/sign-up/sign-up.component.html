@@ -9,13 +9,14 @@
 <app-error-page *ngIf="!loader.library && loader.error"></app-error-page>
 <section *ngIf="!loader.error && !loader.library" fxLayout="row" fxLayoutAlign="center center">
   <form
+    class="sign-up"
     novalidate
     [formGroup]="account"
     (ngSubmit)="createUser()"
     fxLayout="column"
     #accountForm="ngForm"
     autocomplete="off">
-    <mat-card class="users-card">
+    <mat-card>
       <h1 class="app-center">Create User</h1>
 
       <mat-card-content fxLayout="column">

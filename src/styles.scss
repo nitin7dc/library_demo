@@ -241,3 +241,9 @@ section {
   padding: 0 !important;
   min-height:50px !important;
 }
+
+.app-card-2{
+  /deep/.mat-card{
+    padding: 24px !important;
+  }
+}

@@ -1,6 +1,7 @@
 <app-loading *ngIf="loader.loading" [message]="loader.message"></app-loading>
 <app-error-page *ngIf="!loader.loading && loader.error"></app-error-page>
 <form
+  class="app-card-2"
   novalidate
   [formGroup]="bookForm"
   (ngSubmit)="addBook()"

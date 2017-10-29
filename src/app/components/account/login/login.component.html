@@ -42,51 +42,9 @@
             login
           </button>
 
-          <button
-            mat-button
-            [disabled]="loading"
-            (click)="toggleResetPassword()"
-            class="secondary-option">
-            Need Help ?
-          </button>
-
         </mat-card-content>
       </mat-card>
       <button mat-button color="primary" (click)="signUp()">Sign Up</button>
-  </form>
-
-
-  <!-- password reset -->
-  <form
-      novalidate
-      autocomplete="off"
-      [formGroup]="user"
-      (ngSubmit)="submit(user)"
-      fxLayout="column"
-      class="login-box"
-      *ngIf="!loading && showResetPassword">
-      <mat-card>
-        <mat-card-content fxLayout="column" fxLayoutAlign="center center">
-          <h1>Password Reset</h1>
-
-          <!-- email -->
-          <mat-form-field>
-            <input type="email" matInput placeholder="Email" formControlName="email">
-            <mat-error *ngIf="user.get('email').hasError('pattern')">
-              Please enter a valid email address
-            </mat-error>
-            <mat-error *ngIf="user.get('email').hasError('required')">
-              Email is <strong>required</strong>
-            </mat-error>
-          </mat-form-field>
-
-        </mat-card-content>
-
-        <mat-card-actions fxLayout="column" class="login-actions">
-            <button mat-raised-button color="primary" (click)="resetPassword()" [disabled]="loading">send email</button>
-            <button mat-button (click)="toggleResetPassword()" [disabled]="loading">login</button>
-        </mat-card-actions>
-      </mat-card>
   </form>
 
 </section>
