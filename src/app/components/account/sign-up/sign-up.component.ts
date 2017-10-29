@@ -38,6 +38,9 @@ export class SignUpComponent {
   }
 
 
+  /***
+   * Sign up new user.
+   */
   createUser() {
     const user = new User(this.account.value);
     this.userService.create(this.loader, user);

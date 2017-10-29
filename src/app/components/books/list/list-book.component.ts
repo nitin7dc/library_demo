@@ -17,15 +17,12 @@ export class ListBooksComponent implements OnInit {
   @Input() booksReady = [];
   user: User;
   isAdmin = false;
-
   loaders = {
     books: false
   };
-
   books = {
     data: []
   };
-
 
   constructor(private router: Router,
               private userService: UserService,

@@ -49,7 +49,6 @@ export class UserService {
    * Return current instance of user.
    */
   get() {
-    // return this.currentUser;
     return this.currentUserSubject.getValue();
   }
 
@@ -69,6 +68,12 @@ export class UserService {
     return this.currentUserSubject;
   }
 
+
+  /**
+   * Create new user
+   * @param loader
+   * @param payload
+   */
   create(loader: any, payload): void {
     loader.loading = true;
     loader.message = "creating new user...";
@@ -97,6 +102,11 @@ export class UserService {
       });
   }
 
+
+  /**
+   * Check if current user is admin.
+   * @returns {boolean}
+   */
   isAdmin() {
     const user = this.get();
     if (user && user.email === 'sameepsi@gmail.com') {
