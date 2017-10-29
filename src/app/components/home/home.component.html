@@ -1,0 +1,33 @@
+<mat-toolbar>
+  <button mat-icon-button>
+    <mat-icon>home</mat-icon>
+  </button>
+  <span>Home</span>
+  <span class="fill-space" fxFlex></span>
+  <button mat-icon-button
+          *ngIf="admin"
+          (click)="toggleCreateView()"
+          matTooltip="add library"
+          matTooltipPosition="left">
+    <mat-icon>add</mat-icon>
+  </button>
+</mat-toolbar>
+
+
+<section>
+
+  <app-list-library
+    *ngIf="show.list"
+    [libraryId]="libraryId"
+    class="card">
+  </app-list-library>
+
+  <!--Add new library-->
+  <app-create-library
+    *ngIf="show.create"
+    class="card"
+    (passEvents)="listenToChild($event)">
+  </app-create-library>
+
+
+</section>

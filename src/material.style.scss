@@ -1,0 +1,66 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400');
+//@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import '~@angular/material/theming';
+
+// Define a custom typography config that overrides the font-family as well as the
+// `headlines` and `body-1` levels.
+$custom-typography: mat-typography-config(
+  $font-family: 'Lato, sans-serif',
+  $display-4: mat-typography-level(112px, 112px, 300),
+  $display-3: mat-typography-level(56px, 56px, 400),
+  $display-2: mat-typography-level(45px, 48px, 400),
+  $display-1: mat-typography-level(34px, 40px, 400),
+  $headline: mat-typography-level(24px, 32px, 400),
+  $title: mat-typography-level(20px, 32px, 500),
+  $subheading-2: mat-typography-level(16px, 28px, 400),
+  $subheading-1: mat-typography-level(15px, 24px, 400),
+  $body-2: mat-typography-level(12px, 20px, 400),
+  $body-1: mat-typography-level(12px, 20px, 400),
+  $caption: mat-typography-level(12px, 20px, 400),
+  $button: mat-typography-level(14px, 14px, 500),
+  $input: mat-typography-level(16px, 1.125, 400)
+);
+
+// Override typography CSS classes (e.g., mat-h1, mat-display-1, mat-typography, etc.).
+@include mat-base-typography($custom-typography);
+
+// Override typography for a specific Angular Material components.
+@include mat-checkbox-typography($custom-typography);
+
+// Override typography for all Angular Material, including mat-base-typography and all components.
+@include angular-material-typography($custom-typography);
+
+// Override the typography in the core CSS.
+@include mat-core($custom-typography);
+
+$primary: mat-palette($mat-grey, 900);
+$secondary: mat-palette($mat-green, 600);
+$accent: mat-palette($mat-grey, 200);
+$warn: mat-palette($mat-red, 800);
+$theme: mat-light-theme($primary, $accent, $warn);
+@include angular-material-theme($theme);
+
+//// Define an alternate dark theme.
+//$dark-primary: mat-palette($mat-grey, 900);
+//$dark-accent:  mat-palette($mat-green, 600);
+//$dark-warn:    mat-palette($mat-red, 800);
+//$dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+//// Include the alternative theme styles inside of a block with a CSS class. You can make this
+//// CSS class whatever you want. In this example, any component inside of an element with
+//// `.unicorn-dark-theme` will be affected by this alternate dark theme instead of the default theme.
+//.side-menu-dark-theme {
+//  @include angular-material-theme($dark-theme);
+//}
+
+@mixin border-radius($radius: 6px) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  border-radius: $radius;
+}
+
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }

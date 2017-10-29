@@ -1,0 +1,44 @@
+<mat-toolbar>
+  <button mat-icon-button (click)="back()">
+    <mat-icon>keyboard_backspace</mat-icon>
+  </button>
+  <span>Library</span>
+  <button mat-icon-button>
+    <mat-icon>keyboard_arrow_right</mat-icon>
+  </button>
+  <span>{{library?.name}}</span>
+
+  <span class="fill-space"></span>
+  <button mat-icon-button
+          *ngIf="isAdmin"
+          (click)="addBook()"
+          matTooltip="add book"
+          matTooltipPosition="left">
+    <mat-icon>add</mat-icon>
+  </button>
+</mat-toolbar>
+
+<section>
+
+  <mat-card class="card">
+    <mat-card-content>
+      <h2>Name : {{library?.name}}</h2>
+      <p>{{library?.description}}</p>
+    </mat-card-content>
+  </mat-card>
+
+  <!--list of books-->
+  <app-list-books
+    *ngIf="show.list"
+    [library_id]="library._id">
+  </app-list-books>
+
+
+  <!--add new book-->
+  <app-add-book
+    *ngIf="show.addBook"
+    [library_id]="library._id"
+    (passEvents)="listenToChild($event)">
+  </app-add-book>
+
+</section>

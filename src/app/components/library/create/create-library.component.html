@@ -1,0 +1,43 @@
+<app-loading *ngIf="loader.loading" [message]="loader.message"></app-loading>
+<app-error-page *ngIf="!loader.loading && loader.error"></app-error-page>
+<form
+  novalidate
+  [formGroup]="libraryForm"
+  (ngSubmit)="createLibrary()"
+  fxLayout="column"
+  #libForm="ngForm"
+  autocomplete="off">
+
+  <mat-card *ngIf="!loader.error && !loader.loading" fxLayout="column">
+    <h1>Add Library</h1>
+
+    <!-- name -->
+    <mat-form-field>
+      <input type="text" matInput placeholder="Name" formControlName="name">
+      <mat-error *ngIf="libraryForm.get('name').hasError('required')">
+        * required.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- description -->
+    <mat-form-field>
+      <input matInput type="text" placeholder="Description" formControlName="description">
+      <mat-error [hidden]="!(libraryForm.get('description').hasError('required'))">
+        * required.
+      </mat-error>
+    </mat-form-field>
+
+  </mat-card>
+
+  <div fxLayout="row" fxLayoutAlign="end center" class="buttons">
+    <button mat-button (click)="cancel()" type="reset">cancel</button>
+    <button mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="loader.loading || libraryForm.invalid">
+      create library
+    </button>
+  </div>
+</form>
+
+

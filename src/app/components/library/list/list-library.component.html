@@ -1,0 +1,27 @@
+<mat-card>
+  <mat-card-content>
+    <mat-list class="app-list">
+
+      <h3 mat-subheader>Libraries</h3>
+
+      <!--loading bar-->
+      <mat-progress-bar color="primary" mode="indeterminate" [hidden]="!loaders.library"></mat-progress-bar>
+
+      <!--list -->
+      <mat-list-item *ngFor="let library of libraries.data" class="app-list-item">
+        <mat-icon mat-list-icon>class</mat-icon>
+        <h4 mat-line>{{library.name}}</h4>
+        <p mat-line> {{library.description}} </p>
+        <button mat-icon-button (click)="selectLibrary(library)">
+          <mat-icon>search</mat-icon>
+        </button>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+
+      <!--list is empty-->
+      <mat-list-item *ngIf="!libraries.data.length && !loaders.library">
+        <p class="app-center">There are no libraries present.</p>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>

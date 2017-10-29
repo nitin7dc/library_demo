@@ -1,0 +1,70 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button (click)="login()">
+    <i class="material-icons">arrow_back</i>
+  </button>
+  <span>Sign Up</span>
+</mat-toolbar>
+
+<app-loading *ngIf="loader.library" [message]="loader.message"></app-loading>
+<app-error-page *ngIf="!loader.library && loader.error"></app-error-page>
+<section *ngIf="!loader.error && !loader.library" fxLayout="row" fxLayoutAlign="center center">
+  <form
+    novalidate
+    [formGroup]="account"
+    (ngSubmit)="createUser()"
+    fxLayout="column"
+    #accountForm="ngForm"
+    autocomplete="off">
+    <mat-card class="users-card">
+      <h1 class="app-center">Create User</h1>
+
+      <mat-card-content fxLayout="column">
+
+        <!-- email -->
+        <mat-form-field>
+          <input type="email" matInput placeholder="Email" formControlName="email">
+          <mat-error *ngIf="account.get('email').hasError('pattern')">
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="account.get('email').hasError('required')">
+            * required.
+          </mat-error>
+        </mat-form-field>
+
+        <!-- password -->
+        <mat-form-field>
+          <input matInput type="password" placeholder="Password" formControlName="password">
+          <mat-error [hidden]="!(account.get('password').hasError('required'))">
+            * required.
+          </mat-error>
+        </mat-form-field>
+
+        <!--library-->
+        <mat-form-field>
+          <mat-select placeholder="Library" formControlName="library">
+            <mat-option *ngFor="let library of libraries.data" [value]="library">
+              {{library.name}}
+            </mat-option>
+          </mat-select>
+          <mat-error [hidden]="!(account.get('library').hasError('required'))">
+            * required.
+          </mat-error>
+        </mat-form-field>
+
+        <button
+          class="sign-up-btn"
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="loader.loading || account.invalid">
+          sign up
+        </button>
+
+        <button mat-button (click)="login()" class="secondary-option">login</button>
+
+      </mat-card-content>
+
+    </mat-card>
+  </form>
+
+</section>
